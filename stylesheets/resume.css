@@ -1,0 +1,15 @@
+/* CSS Document */
+.container {
+	margin: 0 15%;
+	display: flex;
+	
+}
+
+.item {
+	text-align: center;
+	flex: 1;
+}
+
+ul {
+	list-style-type: none;
+}

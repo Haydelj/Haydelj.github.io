@@ -1,0 +1,17 @@
+/* CSS Document */
+
+.container {
+	margin: 0 20%;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.item {
+	text-align:center;
+
+}
+img {
+	width:200px;
+	height:200px;
+}
