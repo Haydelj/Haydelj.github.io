@@ -1,28 +1,21 @@
 (function () {
-	var current = location.pathname.split("/").pop() || "index.html";
-	var isHome = current === "index.html";
+	"use strict";
 
-	var links = [
-		{ href: "resume.html", label: "Resume" },
-		{ href: "research.html", label: "Research" },
-		{ href: "https://vsco.co/jacob-haydel/gallery", label: "Photography ↗", external: true },
-		{ href: "contact.html", label: "Contact" }
-	];
+	/* Scrollspy for the sticky index bar — lifted from the style guide's
+	   own script (~/Desktop/style-guide.html), with one adaptation: that
+	   guide's index only ever held in-page anchors, so it queried every
+	   `.idxbar a` directly. This page's bar also carries an external
+	   "Photography" link, so targets are scoped to `[href^="#"]` first —
+	   passing an absolute URL to document.querySelector() throws. */
+	var links = Array.prototype.slice.call(document.querySelectorAll('.idxbar a[href^="#"]'));
+	var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
 
-	var linksHtml = links.map(function (link) {
-		var isActive = link.href === current;
-		var attrs = isActive ? ' class="active" aria-current="page"' : "";
-		if (link.external) {
-			attrs += ' target="_blank" rel="noopener noreferrer"';
-		}
-		return '<a href="' + link.href + '"' + attrs + '>' + link.label + "</a>";
-	}).join("\n\t\t");
+	function spy() {
+		var best = 0, y = window.scrollY + 120;
+		targets.forEach(function (el, i) { if (el && el.offsetTop <= y) best = i; });
+		links.forEach(function (a, i) { a.classList.toggle("on", i === best); });
+	}
 
-	var wordmarkAttrs = isHome ? ' aria-current="page"' : "";
-
-	document.getElementById("nav-placeholder").outerHTML =
-		'<nav class="topnav">\n' +
-		'\t<a class="wordmark"' + wordmarkAttrs + ' href="index.html">Jacob Haydel</a>\n' +
-		'\t<div class="nav-links">\n\t\t' + linksHtml + '\n\t</div>\n' +
-		'</nav>';
+	window.addEventListener("scroll", spy, { passive: true });
+	spy();
 })();
