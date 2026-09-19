@@ -119,7 +119,8 @@ section{padding:36px 0 48px;scroll-margin-top:48px}
    guide, and a second auto margin on this side would split the leftover
    space between the two, pushing the section links into the middle. */
 .idxbar .wm{font-family:var(--display);font-weight:600;font-size:15px;
-  font-variation-settings:"wdth" 100,"wght" 600;color:var(--ink);text-decoration:none}
+  font-variation-settings:"wdth" 100,"wght" 600;color:var(--ink);text-decoration:none;
+  text-transform:none;letter-spacing:normal}
 .idxbar .wm:hover{color:var(--ink)}
 
 /* portrait — hairline edge only, no crop, no decoration */
@@ -128,8 +129,7 @@ section{padding:36px 0 48px;scroll-margin-top:48px}
 
 /* publication / CV rows: the .listrow idiom, with an author
    line underneath since the guide's row has no author slot */
-.listrow{flex-wrap:wrap}
-.listrow .ti{flex:1 1 auto;min-width:0}
+.listrow .ti{flex:1 1 0;min-width:0}
 .listrow .ti .au{display:block;margin-top:2px}
 .listrow .yr.wide{width:88px}
 
@@ -145,6 +145,7 @@ section{padding:36px 0 48px;scroll-margin-top:48px}
 
 @media(max-width:700px){
   .titleblock{flex-direction:column-reverse}
+  .titleblock .main{flex:none}
   .portrait{max-width:100%}
   .listrow{flex-direction:column;gap:2px;padding:12px 0}
   .listrow .yr,.listrow .ven{width:auto}
